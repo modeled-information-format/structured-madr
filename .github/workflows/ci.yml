@@ -85,7 +85,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
       - name: Validate project ADRs
-        uses: modeled-information-format/structured-madr@f8331ed88f0334a07ac939efed45dbd00d926a7e # v1.1.0
+        uses: ./
         with:
           path: docs/decisions
           strict: 'false'
@@ -97,7 +97,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
       - name: Validate example ADRs
-        uses: modeled-information-format/structured-madr@f8331ed88f0334a07ac939efed45dbd00d926a7e # v1.1.0
+        uses: ./
         with:
           path: examples
           strict: 'false'
