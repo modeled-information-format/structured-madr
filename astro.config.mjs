@@ -15,7 +15,7 @@ export default defineConfig({
         {
           icon: "github",
           label: "GitHub",
-          href: "https://github.com/zircote/structured-madr",
+          href: "https://github.com/modeled-information-format/structured-madr",
         },
       ],
       sidebar: [

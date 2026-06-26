@@ -25,3 +25,6 @@ coverage/
 *.tmp
 *.temp
 .cache/
+
+# Astro generated
+.astro/

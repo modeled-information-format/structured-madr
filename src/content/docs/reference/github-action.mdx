@@ -26,7 +26,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Validate Structured MADR
-        uses: zircote/structured-madr@v1
+        uses: modeled-information-format/structured-madr@v1
         with:
           path: docs/decisions
 ```
@@ -62,7 +62,7 @@ The action sets these outputs for use in subsequent workflow steps.
 Fail the workflow on any warnings, not just errors:
 
 ```yaml
-- uses: zircote/structured-madr@v1
+- uses: modeled-information-format/structured-madr@v1
   with:
     strict: 'true'
 ```
@@ -72,7 +72,7 @@ Fail the workflow on any warnings, not just errors:
 If your ADRs live in a non-default location:
 
 ```yaml
-- uses: zircote/structured-madr@v1
+- uses: modeled-information-format/structured-madr@v1
   with:
     path: architecture/decisions
 ```
@@ -82,7 +82,7 @@ If your ADRs live in a non-default location:
 Validate against your own extended schema:
 
 ```yaml
-- uses: zircote/structured-madr@v1
+- uses: modeled-information-format/structured-madr@v1
   with:
     schema: .github/schemas/custom-madr.schema.json
 ```
@@ -92,7 +92,7 @@ Validate against your own extended schema:
 Report validation results without failing the workflow:
 
 ```yaml
-- uses: zircote/structured-madr@v1
+- uses: modeled-information-format/structured-madr@v1
   id: adr-check
   with:
     fail-on-error: 'false'
@@ -106,7 +106,7 @@ Report validation results without failing the workflow:
 ### Using Outputs in Conditional Steps
 
 ```yaml
-- uses: zircote/structured-madr@v1
+- uses: modeled-information-format/structured-madr@v1
   id: validate
   with:
     fail-on-error: 'false'
@@ -138,7 +138,7 @@ Validation errors appear as GitHub annotations on the pull request, pointing to 
 You can run the same validation locally:
 
 ```bash
-git clone https://github.com/zircote/structured-madr.git
+git clone https://github.com/modeled-information-format/structured-madr.git
 cd structured-madr
 npm install
 INPUT_PATH=/path/to/your/docs/decisions npm run validate

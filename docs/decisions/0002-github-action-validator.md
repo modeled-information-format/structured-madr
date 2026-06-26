@@ -192,7 +192,7 @@ The implementation will include:
 
 The action will be usable in any workflow:
 ```yaml
-- uses: zircote/structured-madr@v1
+- uses: modeled-information-format/structured-madr@v1
   with:
     path: docs/decisions
 ```

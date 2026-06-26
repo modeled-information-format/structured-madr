@@ -6,8 +6,8 @@ abstract: "Machine-readable Architectural Decision Records with YAML frontmatter
 version: "1.1.0"
 date-released: "2026-03-06"
 license: MIT
-url: "https://github.com/zircote/structured-madr"
-repository-code: "https://github.com/zircote/structured-madr"
+url: "https://github.com/modeled-information-format/structured-madr"
+repository-code: "https://github.com/modeled-information-format/structured-madr"
 authors:
   - family-names: "Allen"
     given-names: "Robert"
@@ -15,7 +15,7 @@ authors:
     orcid: "https://orcid.org/0009-0007-9691-004X"
 identifiers:
   - type: url
-    value: "https://github.com/zircote/structured-madr"
+    value: "https://github.com/modeled-information-format/structured-madr"
     description: "GitHub repository"
 keywords:
   - "adr"
@@ -34,8 +34,8 @@ preferred-citation:
   version: "1.1.0"
   date-released: "2026-03-06"
   license: MIT
-  url: "https://github.com/zircote/structured-madr"
-  repository-code: "https://github.com/zircote/structured-madr"
+  url: "https://github.com/modeled-information-format/structured-madr"
+  repository-code: "https://github.com/modeled-information-format/structured-madr"
 references:
   - type: software
     title: "Markdown Architectural Decision Records (MADR)"

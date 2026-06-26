@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 40">
+  <rect x="0" y="4" width="32" height="32" rx="4" fill="#6d28d9"/>
+  <text x="16" y="26" font-family="system-ui, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">M</text>
+  <text x="44" y="27" font-family="system-ui, sans-serif" font-size="20" font-weight="bold" fill="#1e1b4b">Structured MADR</text>
+</svg>

@@ -7,7 +7,7 @@ Structured MADR is an extension of [MADR](https://adr.github.io/madr/) (Markdown
 [![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Specification](https://img.shields.io/badge/spec-1.0.0-purple.svg)](SPECIFICATION.md)
-[![Validate ADRs](https://github.com/zircote/structured-madr/actions/workflows/validate-adrs.yml/badge.svg)](https://github.com/zircote/structured-madr/actions/workflows/validate-adrs.yml)
+[![CI](https://github.com/modeled-information-format/structured-madr/actions/workflows/ci.yml/badge.svg)](https://github.com/modeled-information-format/structured-madr/actions/workflows/ci.yml)
 
 ## Why Structured MADR?
 
@@ -36,7 +36,7 @@ Structured MADR addresses these gaps while remaining fully human-readable and co
 ### 1. Copy the Template
 
 ```bash
-curl -O https://raw.githubusercontent.com/zircote/structured-madr/main/templates/template.md
+curl -O https://raw.githubusercontent.com/modeled-information-format/structured-madr/main/templates/template.md
 mv template.md docs/adr/0001-your-decision.md
 ```
 
@@ -230,7 +230,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Validate Structured MADR
-        uses: zircote/structured-madr@v1
+        uses: modeled-information-format/structured-madr@v1
         with:
           path: docs/decisions    # Path to your ADRs (default: docs/decisions)
           pattern: '**/*.md'      # Glob pattern for ADR files (default: **/*.md)
@@ -264,7 +264,7 @@ Validate your ADRs locally using the CLI:
 
 ```bash
 # Clone and install
-git clone https://github.com/zircote/structured-madr.git
+git clone https://github.com/modeled-information-format/structured-madr.git
 cd structured-madr
 npm install
 
@@ -296,7 +296,7 @@ Structured MADR's frontmatter enables AI tools to:
 
 ### Plugins
 
-- **[ADR Plugin for Claude Code](https://github.com/zircote/marketplace/tree/main/plugins/adr)** - Full lifecycle management
+- **[ADR Plugin for Claude Code](https://github.com/modeled-information-format/marketplace/tree/main/plugins/adr)** - Full lifecycle management
 
 ## Resources
 
@@ -315,7 +315,7 @@ If you use Structured MADR in academic or published work, please cite it using t
   author    = {Allen, Robert},
   title     = {Structured MADR},
   version   = {1.1.0},
-  url       = {https://github.com/zircote/structured-madr},
+  url       = {https://github.com/modeled-information-format/structured-madr},
   license   = {MIT}
 }
 ```
