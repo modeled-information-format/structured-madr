@@ -1,10 +1,12 @@
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
+import starlightLlmsTxt from "starlight-llms-txt";
 
 export default defineConfig({
   site: "https://smadr.dev",
   integrations: [
     starlight({
+      plugins: [starlightLlmsTxt()],
       title: "Structured MADR",
       logo: {
         light: "./src/assets/logo-light.svg",
