@@ -1,0 +1,9 @@
+{
+  "name": "structured-madr-mif",
+  "version": "1.0.0",
+  "description": "MIF compliance for structured-MADR ADRs: a per-level projector and validator, an ADR-typing ontology, an authoring skill/agent/commands, and an authoring-time enforcement hook. The conformance level is selected in .github/mif/config.yml.",
+  "license": "MIT",
+  "author": {
+    "name": "zircote"
+  }
+}

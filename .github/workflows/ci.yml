@@ -101,3 +101,25 @@ jobs:
         with:
           path: examples
           strict: 'false'
+
+  # ── MIF compliance (vendored-schema integrity + dogfooded MIF gate) ───────
+  mif-vendor-check:
+    name: MIF Vendor Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Verify vendored MIF schemas match VENDOR.lock
+        run: node .github/mif/bin/vendor-check.js
+
+  validate-mif:
+    name: Validate MIF Conformance
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: MIF conformance gate (level from .github/mif/config.yml)
+        uses: ./
+        with:
+          mode: mif
+          path: docs/decisions

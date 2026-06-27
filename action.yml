@@ -7,6 +7,18 @@ branding:
   color: 'green'
 
 inputs:
+  mode:
+    description: "Validation mode: 'smadr' (structured-MADR frontmatter) or 'mif' (MIF conformance projection)"
+    required: false
+    default: 'smadr'
+  mif-level:
+    description: 'MIF conformance level override (1|2|3). If empty, read from mif-config.'
+    required: false
+    default: ''
+  mif-config:
+    description: 'Path to the MIF config (relative to the consumer repo)'
+    required: false
+    default: '.github/mif/config.yml'
   path:
     description: 'Path to the directory containing ADR files (relative to repository root)'
     required: false
@@ -44,6 +56,18 @@ outputs:
   warnings:
     description: 'Number of warnings generated'
     value: ${{ steps.validate.outputs.warnings }}
+  mif-valid:
+    description: 'MIF mode: whether all ADRs passed MIF conformance'
+    value: ${{ steps.mif.outputs.mif-valid }}
+  mif-total:
+    description: 'MIF mode: total ADRs checked'
+    value: ${{ steps.mif.outputs.mif-total }}
+  mif-passed:
+    description: 'MIF mode: ADRs that passed MIF conformance'
+    value: ${{ steps.mif.outputs.mif-passed }}
+  mif-failed:
+    description: 'MIF mode: ADRs that failed MIF conformance'
+    value: ${{ steps.mif.outputs.mif-failed }}
 
 runs:
   using: 'composite'
@@ -60,6 +84,7 @@ runs:
 
     - name: Run validation
       id: validate
+      if: ${{ inputs.mode != 'mif' }}
       shell: bash
       env:
         INPUT_PATH: ${{ inputs.path }}
@@ -70,3 +95,15 @@ runs:
         ACTION_PATH: ${{ github.action_path }}
       run: |
         node "$ACTION_PATH/src/validate.js"
+
+    - name: Run MIF conformance validation
+      id: mif
+      if: ${{ inputs.mode == 'mif' }}
+      shell: bash
+      env:
+        GITHUB_ACTION_PATH: ${{ github.action_path }}
+      run: |
+        args=(--path "${{ inputs.path }}" --pattern "${{ inputs.pattern }}" --config "${{ inputs.mif-config }}")
+        if [ -n "${{ inputs.mif-level }}" ]; then args+=(--level "${{ inputs.mif-level }}"); fi
+        if [ "${{ inputs.strict }}" = "true" ]; then args+=(--strict); fi
+        node "${{ github.action_path }}/.github/mif/bin/mif-validate.js" "${args[@]}"

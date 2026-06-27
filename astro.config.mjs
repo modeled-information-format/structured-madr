@@ -73,6 +73,7 @@ export default defineConfig({
             },
             { label: "Schema", slug: "reference/schema" },
             { label: "GitHub Action", slug: "reference/github-action" },
+            { label: "MIF Compliance", slug: "reference/mif-compliance" },
             { label: "Templates", slug: "reference/templates" },
             { label: "Changelog", slug: "reference/changelog" },
           ],

@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **[MIF Compliance]**: validate ADRs as MIF (Modeled Information Format) at a
+  user-selected level (`.github/mif/config.yml` `mifConformanceLevel: 1|2|3`,
+  default 2). Markdown stays canonical; a MIF JSON-LD object is derived from
+  frontmatter + body and validated against per-level profiles.
+  - Self-contained plugin under `.github/mif/` (vendored + checksum-pinned MIF
+    schemas, config, projector, validator, ADR-typing ontology, skill/agent/commands/hook).
+  - `npm run validate:mif`; composite action gains `mode: mif` for downstream consumers.
+  - CI gates: `mif-vendor-check` (schema drift) and dogfooded `validate-mif`.
+  - ADR-0003 records the decision and is itself MIF-conformant (dogfooded).
+
 ## [1.1.0] - 2026-01-15
 
 ### Added

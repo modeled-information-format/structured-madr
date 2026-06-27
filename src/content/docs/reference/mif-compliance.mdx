@@ -1,0 +1,81 @@
+---
+title: MIF Compliance
+description: Validate structured-MADR ADRs as MIF (Modeled Information Format) at a user-selected conformance level.
+---
+
+structured-MADR ADRs can be validated as **MIF (Modeled Information Format)** at a
+level you select. The markdown stays canonical; a MIF JSON-LD object is **derived**
+from each ADR's frontmatter and body and validated against the chosen level. You do
+not write JSON-LD — you fill frontmatter, and the projector assembles and checks it.
+
+The capability ships as a self-contained plugin under `.github/mif/` with vendored,
+checksum-pinned MIF schemas.
+
+## Select the level
+
+Edit the one config file, `.github/mif/config.yml`:
+
+```yaml
+version: 1.0.0
+mifVersion: 1.0.0
+mifConformanceLevel: 2   # 1 (core) | 2 (standard, default) | 3 (full)
+adrPath: docs/decisions
+ontologies:
+  - id: structured-madr
+    enabled: false
+extensions: []
+```
+
+| Level | Adds (always-derivable) | Optional (validated only when present) |
+|-------|-------------------------|----------------------------------------|
+| **1 — Core** | `@id`, `conceptType`, `content` (body), `created`, `title` | — |
+| **2 — Standard** | `namespace`, `modified`, `temporal` | `relationships`, `entities` |
+| **3 — Full** | `provenance`, `temporal.validFrom` | `citations`, `extensions`, `summary` |
+
+A sparse ADR (no `technologies`, no `related`) still passes every level — optional
+collections are validated only when present.
+
+## How frontmatter maps to MIF
+
+| Frontmatter | MIF field |
+|-------------|-----------|
+| `title`, `created`, `updated`, `description`, `tags` | `title`, `created`, `modified`, `summary`, `tags` |
+| `category` | `namespace` = `_semantic/decisions/<category-slug>` |
+| `technologies` | `entities[]` (EntityReference, `Technology`) |
+| `related` | `relationships[] {type: relates-to, target: /decisions/<file>}` |
+| `x-superseded-by` | `relationships[] {type: supersedes, target: /decisions/<file>}` |
+| `author`, `project` | `provenance` (`sourceType: user_explicit`) |
+| body `[label](https://…)` | `citations[]` (Level 3) |
+
+You may also author MIF-native keys (`conceptType`, `namespace`, `relationships`,
+`entities`, `temporal`, `provenance`, `citations`, `id`) directly in frontmatter to
+override the derivation; they are deep-validated against the MIF schema after projection.
+
+## Run the gate
+
+```bash
+npm run validate:mif                 # uses .github/mif/config.yml
+npm run validate:mif -- --level 3    # override the level
+```
+
+The gate is fail-closed at the configured level and emits GitHub annotations naming
+any missing or invalid MIF field.
+
+## In CI / downstream
+
+The composite GitHub Action exposes a `mode: mif`, so any repository can validate its
+ADRs as MIF from the same Action it already uses (see [GitHub Action](/reference/github-action/)):
+
+```yaml
+- uses: modeled-information-format/structured-madr@v1
+  with:
+    mode: mif
+    path: docs/decisions
+    # mif-level: 3      # optional override
+```
+
+## Vendored schemas
+
+`.github/mif/schema/` mirrors MIF `develop/v1.0.0` verbatim; `.github/mif/VENDOR.lock`
+pins the commit and a per-file SHA-256. A `vendor-check` CI gate fails if any vendored
+file drifts. Do not hand-edit vendored schemas — re-vendor and regenerate the lock.

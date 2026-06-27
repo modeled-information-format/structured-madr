@@ -55,6 +55,29 @@ The action sets these outputs for use in subsequent workflow steps.
 | `failed` | `string` | Number of files that failed validation |
 | `warnings` | `string` | Number of warnings generated |
 
+## MIF conformance mode
+
+Set `mode: mif` to validate ADRs as MIF (Modeled Information Format) instead of (or
+in addition to) the MADR frontmatter check. The level is read from the consumer
+repo's `.github/mif/config.yml` unless overridden.
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `mode` | `string` | `smadr` | `smadr` (MADR frontmatter) or `mif` (MIF conformance) |
+| `mif-level` | `string` | `""` | Override the MIF level (1/2/3); empty reads `mif-config` |
+| `mif-config` | `string` | `.github/mif/config.yml` | Path to the MIF config in the consumer repo |
+
+```yaml
+- uses: modeled-information-format/structured-madr@v1
+  with:
+    mode: mif
+    path: docs/decisions
+    # mif-level: 3
+```
+
+Outputs in this mode: `mif-valid`, `mif-total`, `mif-passed`, `mif-failed`. See the
+[MIF Compliance reference](/reference/mif-compliance/) for the level model and field mapping.
+
 ## Configuration Examples
 
 ### Strict Mode

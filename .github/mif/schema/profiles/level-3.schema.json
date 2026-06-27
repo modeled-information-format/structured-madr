@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://smadr.dev/schemas/mif-profile-level-3.schema.json",
+  "title": "MIF conformance profile — Level 3 (Full)",
+  "description": "Level 3 = Level 2 + always-derivable full fields (provenance, temporal.validFrom). Citations, embedding, and extensions are validated by the base schema only when present (content-dependent).",
+  "allOf": [
+    { "$ref": "https://smadr.dev/schemas/mif-profile-level-2.schema.json" },
+    {
+      "type": "object",
+      "required": ["provenance"],
+      "properties": {
+        "temporal": {
+          "type": "object",
+          "required": ["validFrom"]
+        }
+      }
+    }
+  ]
+}

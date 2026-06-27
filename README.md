@@ -207,6 +207,14 @@ After implementation, add audit entries to track compliance:
 
 ## Tooling Support
 
+### MIF Compliance
+
+ADRs can be validated as **MIF (Modeled Information Format)** at a level you select
+in `.github/mif/config.yml` (`mifConformanceLevel: 1|2|3`, default 2). Markdown stays
+canonical; a MIF JSON-LD object is derived from frontmatter + body and validated
+against per-level profiles. Run `npm run validate:mif`, or use the published Action
+with `mode: mif`. See the [MIF Compliance reference](https://smadr.dev/reference/mif-compliance/).
+
 ### GitHub Action
 
 Add automated validation to your CI/CD pipeline:

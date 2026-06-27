@@ -1,0 +1,11 @@
+# structured-madr MIF compliance config (the one file you edit).
+# Validated by .github/mif/schema/config.schema.json.
+$schema: ./schema/config.schema.json
+version: 1.0.0
+mifVersion: 1.0.0            # pinned MIF spec version (see .github/mif/VENDOR.lock)
+mifConformanceLevel: 2       # the knob: 1 (core) | 2 (standard) | 3 (full)
+adrPath: docs/decisions      # glob root for ADRs to project + validate
+ontologies:
+  - id: structured-madr      # ADR-typing ontology (typed entity:adr); opt-in
+    enabled: false
+extensions: []

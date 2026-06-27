@@ -1,0 +1,82 @@
+---
+# structured-madr ADR-typing ontology
+#
+# Types structured-MADR Architecture Decision Records as MIF entities
+# (entity_type: adr) under the _semantic/decisions namespace. Opt-in via
+# .github/mif/config.yml ontologies[] (id: structured-madr, enabled: true);
+# when enabled, the projector stamps each ADR's MIF object with
+# ontology={id,version} + entity={name, entity_type: adr}.
+#
+# Validates against the vendored MIF ontology.schema.json. Extends mif-base.
+
+ontology:
+  id: structured-madr
+  version: "0.1.0"
+  description: "Types structured-MADR ADRs as MIF entities (entity_type: adr) under _semantic/decisions."
+  extends:
+    - mif-base
+  schema_url: >-
+    https://mif-spec.dev/schema/ontology/ontology.schema.json
+
+namespaces:
+  _semantic:
+    description: "Declarative knowledge - facts, concepts, decisions"
+    type_hint: semantic
+    children:
+      decisions:
+        description: "Architectural Decision Records (ADRs)"
+        type_hint: semantic
+
+traits:
+  decision-status:
+    description: "ADR lifecycle status"
+    fields:
+      status:
+        type: string
+        enum:
+          - proposed
+          - accepted
+          - deprecated
+          - superseded
+  dated-decision:
+    description: "ADR creation and revision dates"
+    fields:
+      created:
+        type: string
+        format: date
+      updated:
+        type: string
+        format: date
+
+entity_types:
+  - name: adr
+    description: "An Architecture Decision Record authored in the structured-MADR format"
+    base: semantic
+    traits:
+      - decision-status
+      - dated-decision
+    schema:
+      required:
+        - title
+        - status
+      properties:
+        title:
+          type: string
+        category:
+          type: string
+
+relationships:
+  supersedes:
+    description: "This ADR supersedes a prior decision"
+    from:
+      - adr
+    to:
+      - adr
+    symmetric: false
+  relates-to:
+    description: "This ADR relates to another decision"
+    from:
+      - adr
+    to:
+      - adr
+    symmetric: true
