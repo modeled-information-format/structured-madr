@@ -97,6 +97,12 @@ function main() {
   const cfg = loadConfig(configFile);
   const S = schemaDir();
   if (existsSync(configFile)) assertConfigValid(S, configFile, cfg);
+  // Fail-closed: an explicit --level that isn't 1|2|3 (typo, empty, NaN) must error,
+  // not silently fall back to the default level and gate at the wrong strictness.
+  if (args.level !== undefined && ![1, 2, 3].includes(args.level)) {
+    console.log(`::error::Invalid --level (expected 1|2|3)`);
+    process.exit(2);
+  }
   const level = args.level || cfg.mifConformanceLevel || 2;
   const adrPath = args.path || cfg.adrPath || "docs/decisions";
   const pattern = args.pattern || "**/*.md";
@@ -123,13 +129,13 @@ function main() {
   let passed = 0, failed = 0;
   for (const file of files) {
     const rel = relative(process.cwd(), file);
-    const parsed = splitFrontmatter(readFileSync(file, "utf8"));
-    if (!parsed) { failed++; annotate("error", rel, "no YAML frontmatter"); continue; }
     let obj;
     try {
+      const parsed = splitFrontmatter(readFileSync(file, "utf8"));
+      if (!parsed) { failed++; annotate("error", rel, "no YAML frontmatter"); continue; }
       obj = projectAdr(parsed.fm, parsed.body, { level, filename: file, ontologyEnabled });
     } catch (e) {
-      failed++; annotate("error", rel, `projection failed: ${e.message}`); continue;
+      failed++; annotate("error", rel, `parse/projection failed: ${e.message}`); continue;
     }
     if (validate(obj)) {
       passed++;

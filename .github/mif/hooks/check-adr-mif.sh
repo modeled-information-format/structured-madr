@@ -27,7 +27,7 @@ case "$file" in
 esac
 
 base=$(basename "$file")
-out=$(cd "$root" && node .github/mif/bin/mif-validate.js --path "$adrPath" --pattern "$base" 2>&1)
+out=$(cd "$root" && node .github/mif/bin/mif-validate.js --path "$adrPath" --pattern "**/$base" 2>&1)
 rc=$?
 if [ "$rc" != "0" ]; then
   details=$(printf '%s' "$out" | grep -F '::error' | sed 's/.*:://' | head -3 | paste -sd'; ' -)

@@ -102,8 +102,13 @@ runs:
       shell: bash
       env:
         GITHUB_ACTION_PATH: ${{ github.action_path }}
+        INPUT_PATH: ${{ inputs.path }}
+        INPUT_PATTERN: ${{ inputs.pattern }}
+        INPUT_MIF_CONFIG: ${{ inputs.mif-config }}
+        INPUT_MIF_LEVEL: ${{ inputs.mif-level }}
+        INPUT_STRICT: ${{ inputs.strict }}
       run: |
-        args=(--path "${{ inputs.path }}" --pattern "${{ inputs.pattern }}" --config "${{ inputs.mif-config }}")
-        if [ -n "${{ inputs.mif-level }}" ]; then args+=(--level "${{ inputs.mif-level }}"); fi
-        if [ "${{ inputs.strict }}" = "true" ]; then args+=(--strict); fi
-        node "${{ github.action_path }}/.github/mif/bin/mif-validate.js" "${args[@]}"
+        args=(--path "$INPUT_PATH" --pattern "$INPUT_PATTERN" --config "$INPUT_MIF_CONFIG")
+        if [ -n "$INPUT_MIF_LEVEL" ]; then args+=(--level "$INPUT_MIF_LEVEL"); fi
+        if [ "$INPUT_STRICT" = "true" ]; then args+=(--strict); fi
+        node "$GITHUB_ACTION_PATH/.github/mif/bin/mif-validate.js" "${args[@]}"
