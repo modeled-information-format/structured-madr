@@ -10,6 +10,8 @@
     "preview": "astro preview",
     "generate:spec": "node scripts/generate-spec-pages.mjs",
     "validate": "node src/validate.js",
+    "validate:mif": "node .github/mif/bin/mif-validate.js",
+    "test:mif": "node .github/mif/test/profiles.test.mjs",
     "test": "node --test src/**/*.test.js",
     "lint": "eslint src/"
   },

@@ -112,6 +112,63 @@
       },
       "uniqueItems": true,
       "examples": [["adr_0001.md", "adr_0005.md"]]
+    },
+    "x-superseded-by": {
+      "type": "string",
+      "description": "MIF: filename of the ADR that supersedes this one. Projected to a MIF 'supersedes' relationship. Use when status is 'superseded'.",
+      "pattern": "^[a-zA-Z0-9_-]+\\.md$"
+    },
+    "id": {
+      "type": "string",
+      "description": "MIF: stable identifier for this decision (UUID or slug). If absent, the projector synthesizes urn:mif:smadr:<project>:<file-slug>.",
+      "minLength": 1
+    },
+    "conceptType": {
+      "type": "string",
+      "description": "MIF: cognitive-triad type. ADRs are semantic (knowledge). Distinct from the MADR 'type' (const 'adr').",
+      "enum": ["semantic", "episodic", "procedural"],
+      "default": "semantic"
+    },
+    "namespace": {
+      "type": "string",
+      "description": "MIF: hierarchical namespace. If absent, derived as _semantic/decisions/<category-slug>.",
+      "pattern": "^[a-zA-Z0-9_-]+(/[a-zA-Z0-9_-]+)*$"
+    },
+    "summary": {
+      "type": "string",
+      "description": "MIF (L3): short summary. If absent, the projector uses 'description'.",
+      "minLength": 1
+    },
+    "relationships": {
+      "type": "array",
+      "description": "MIF (L2): typed relationships {type (kebab-case), target}. Usually derived from 'related'/'x-superseded-by'; author overrides accepted. Deep-validated against the MIF schema after projection.",
+      "items": {
+        "type": "object",
+        "required": ["type", "target"],
+        "properties": {
+          "type": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*(:[a-z0-9][a-z0-9-]*)?$" },
+          "target": { "type": "string" },
+          "strength": { "type": "number", "minimum": 0, "maximum": 1 }
+        }
+      }
+    },
+    "entities": {
+      "type": "array",
+      "description": "MIF (L2): EntityReferences. Usually derived from 'technologies'; author overrides accepted. Deep-validated against the MIF schema after projection.",
+      "items": { "type": "object" }
+    },
+    "temporal": {
+      "type": "object",
+      "description": "MIF (L2/L3): temporal metadata. Usually derived from created/updated/status; deep-validated after projection."
+    },
+    "provenance": {
+      "type": "object",
+      "description": "MIF (L3): W3C-PROV provenance. Usually derived from author/project; deep-validated after projection."
+    },
+    "citations": {
+      "type": "array",
+      "description": "MIF (L3): citations. Usually extracted from body Links; author overrides accepted. Deep-validated after projection.",
+      "items": { "type": "object" }
     }
   },
   "additionalProperties": {

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://smadr.dev/schemas/mif-config.schema.json",
+  "title": "structured-madr MIF Compliance Config",
+  "description": "The single user-edited contract selecting the MIF conformance level the projector emits and the gate enforces. A superset of the MIF spec's .mif/config.yaml.",
+  "type": "object",
+  "required": ["version", "mifConformanceLevel"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "This config's version (semver)."
+    },
+    "mifVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+.*$",
+      "description": "Pinned MIF spec version (reconciles the spec .mif/config.yaml mif_version)."
+    },
+    "mifConformanceLevel": {
+      "type": "integer",
+      "enum": [1, 2, 3],
+      "description": "User-selected MIF level the projector emits AND the gate enforces. Maps to the spec conformance_level."
+    },
+    "adrPath": {
+      "type": "string",
+      "description": "Glob root for ADRs (default docs/decisions).",
+      "default": "docs/decisions"
+    },
+    "ontologies": {
+      "type": "array",
+      "description": "ADR-typing ontology control plane (mirrors the harness ontologies[]).",
+      "items": {
+        "type": "object",
+        "required": ["id", "enabled"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+          "enabled": { "type": "boolean" }
+        }
+      }
+    },
+    "extensions": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Declared extension ids (reconciles the spec .mif/config.yaml extensions)."
+    }
+  }
+}

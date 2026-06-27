@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://smadr.dev/schemas/mif-profile-level-1.schema.json",
+  "title": "MIF conformance profile — Level 1 (Core)",
+  "description": "Level 1 = the MIF core required fields (@context, @type, @id, conceptType, content, created). No overlay beyond the base schema.",
+  "$ref": "https://mif-spec.dev/schema/mif.schema.json"
+}
