@@ -23,7 +23,7 @@ jobs:
   pin-check:
     permissions:
       contents: read
-    uses: modeled-information-format/.github/.github/workflows/pin-check.yml@a9ea785d2f7b9e8d70c5ce763dde2cd74af28bd1
+    uses: modeled-information-format/.github/.github/workflows/pin-check.yml@f83ee8058630235396f7242580570b26cf3617fa
 
   actionlint:
     permissions:
