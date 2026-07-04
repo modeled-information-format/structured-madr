@@ -100,6 +100,11 @@ export default defineConfig({
           items: [
             { label: "MIF home", link: "https://modeled-information-format.github.io/" },
             { label: "Ecosystem docs", link: "https://modeled-information-format.github.io/docs/" },
+            { label: "Research harness", link: "https://modeled-information-format.github.io/research-harness-template/" },
+            { label: "Ontology corpus", link: "https://modeled-information-format.github.io/ontologies/" },
+            { label: "mif-docs plugin", link: "https://modeled-information-format.github.io/mif-docs-plugin/" },
+            { label: "Plugin marketplace", link: "https://modeled-information-format.github.io/claude-code-plugins/" },
+            { label: "mif-rs", link: "https://modeled-information-format.github.io/mif-rs/" },
             { label: "Specification (mif-spec.dev)", link: "https://mif-spec.dev" },
           ],
         },
