@@ -1,5 +1,10 @@
 # Structured MADR
 
+<p align="center">
+  <img src=".github/social-preview.png" width="860"
+       alt="Structured MADR — machine-readable Architectural Decision Records. The decision a person writes and the metadata a parser filters on: one record, both readers, gate-checked before it merges.">
+</p>
+
 **Machine-Readable Architectural Decision Records for the AI Era**
 
 Structured MADR is an extension of [MADR](https://adr.github.io/madr/) (Markdown Architectural Decision Records) that adds YAML frontmatter for machine-readable metadata, comprehensive option analysis with risk assessments, and required audit sections for compliance tracking.
