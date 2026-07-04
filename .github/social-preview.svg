@@ -1,0 +1,82 @@
+<svg width="1280" height="640" viewBox="0 0 1280 640" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Structured MADR — machine-readable Architectural Decision Records. The decision a person writes and the metadata a parser filters on: one record, both readers, gate-checked before it merges.">
+  <title>Structured MADR — the specification, gate-checked</title>
+  <desc>Dark field. The chevron-M MIF mark and Structured MADR wordmark. Title "Machine-Readable ADRs". Three pillars — YAML frontmatter, risk assessment, audit trail — beside the frontmatter-meets-record motif: a machine-cyan metadata block flowing into a human-amber decision record, joined by a validated-checkmark gate badge.</desc>
+  <defs>
+    <linearGradient id="field" x1="0" y1="0" x2="1280" y2="640" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0A0D13"/>
+      <stop offset="1" stop-color="#0E121B"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Field -->
+  <rect width="1280" height="640" fill="url(#field)"/>
+  <rect x="36" y="36" width="1208" height="568" rx="20" fill="none" stroke="#222C3C" stroke-width="2"/>
+
+  <!-- ===== Identity lockup (top-left): chevron-M mark + wordmark ===== -->
+  <g transform="translate(84 66) scale(1.15)" fill="none" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M6 42 L6 6 L24 29" stroke="#34D3E8"/>
+    <path d="M24 29 L42 6 L42 42" stroke="#F5B642"/>
+    <path d="M24 25.6 L27.4 29 L24 32.4 L20.6 29 Z" fill="#E8EEF6" stroke="none"/>
+  </g>
+  <text x="150" y="112" font-family="Menlo, 'SF Mono', 'JetBrains Mono', monospace"
+        font-size="30" font-weight="700" letter-spacing="0.04em" fill="#E8EEF6">Structured MADR</text>
+  <text x="150" y="136" font-family="Menlo, 'SF Mono', 'JetBrains Mono', monospace"
+        font-size="15" fill="#7C8AA0" letter-spacing="0.05em">A MIF-ecosystem specification</text>
+
+  <!-- ===== Title block (left column) ===== -->
+  <text x="84" y="214" font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif"
+        font-size="52" font-weight="700" letter-spacing="-0.02em" fill="#E8EEF6">Machine-Readable ADRs</text>
+  <text x="86" y="252" font-family="Menlo, 'SF Mono', 'JetBrains Mono', monospace"
+        font-size="17" fill="#AEBCCF" letter-spacing="0.01em">Decisions a person writes, metadata a parser filters on.</text>
+
+  <!-- ===== Three pillars ===== -->
+  <rect x="86" y="316" width="16" height="16" rx="2" fill="#34D3E8"/>
+  <text x="122" y="324" font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif"
+        font-size="24" font-weight="600" fill="#E8EEF6">YAML frontmatter</text>
+  <text x="122" y="350" font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif"
+        font-size="16" fill="#7C8AA0">Machine-parseable metadata for tooling integration.</text>
+
+  <path d="M94 398 L100.4 404.4 L94 410.8 L87.6 404.4 Z" fill="#E8EEF6"/>
+  <text x="122" y="406" font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif"
+        font-size="24" font-weight="600" fill="#E8EEF6">Risk assessment</text>
+  <text x="122" y="432" font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif"
+        font-size="16" fill="#7C8AA0">Technical, schedule, and ecosystem risk per option.</text>
+
+  <circle cx="94" cy="488" r="9" fill="#F5B642"/>
+  <text x="122" y="496" font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif"
+        font-size="24" font-weight="600" fill="#E8EEF6">Audit trail</text>
+  <text x="122" y="522" font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif"
+        font-size="16" fill="#7C8AA0">Built-in compliance tracking with findings tables.</text>
+
+  <!-- ===== Frontmatter-meets-record motif (right column) ===== -->
+  <g transform="translate(671.2 60.56) scale(0.96)">
+    <text x="280" y="114" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="12" letter-spacing="0.1em" fill="#7C8AA0">METADATA MEETS THE RECORD</text>
+
+    <rect x="70" y="130" width="420" height="96" rx="12" fill="#0A2630" stroke="#2E3A4D"/>
+    <path d="M70 142 a12 12 0 0 1 12 -12 h396 a12 12 0 0 1 12 12 v8 h-420 z" fill="#0A2630"/>
+    <circle cx="88" cy="146" r="5" fill="#34D3E8"/>
+    <text x="102" y="150" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="13" font-weight="700" fill="#34D3E8">frontmatter · machine-parseable</text>
+    <text x="88" y="178" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="12.5" xml:space="preserve"><tspan fill="#34D3E8">status</tspan><tspan fill="#7C8AA0">: accepted  </tspan><tspan fill="#34D3E8">risk</tspan><tspan fill="#7C8AA0">: </tspan><tspan fill="#F5B642">medium</tspan></text>
+    <text x="88" y="198" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="12.5" xml:space="preserve"><tspan fill="#34D3E8">drivers</tspan><tspan fill="#7C8AA0">: [cost, latency]  </tspan><tspan fill="#34D3E8">relates_to</tspan><tspan fill="#7C8AA0">: [...]</tspan></text>
+
+    <path d="M280 226 L280 252" stroke="#7C8AA0" stroke-width="2"/>
+    <path d="M266 240 L280 252 L294 240" stroke="#7C8AA0" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+
+    <rect x="70" y="260" width="420" height="86" rx="12" fill="#2A2110" stroke="#2E3A4D"/>
+    <path d="M70 272 a12 12 0 0 1 12 -12 h396 a12 12 0 0 1 12 12 v8 h-420 z" fill="#2A2110"/>
+    <circle cx="88" cy="276" r="5" fill="#F5B642"/>
+    <text x="102" y="280" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="13" font-weight="700" fill="#F5B642">decision record · human-readable</text>
+    <text x="88" y="312" font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#E8EEF6">## Use a managed queue over self-hosted</text>
+    <rect x="88" y="324" width="340" height="7" rx="3.5" fill="#3C4B63"/>
+
+    <rect x="98" y="368" width="364" height="30" rx="15" fill="#0B2618" stroke="#34C77B" stroke-opacity="0.5"/>
+    <circle cx="116" cy="383" r="4.5" fill="#34C77B"/>
+    <text x="132" y="387" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="12.5" letter-spacing="0.02em" xml:space="preserve"><tspan fill="#34C77B">structured-madr Action</tspan><tspan fill="#AEBCCF"> · schema-validated · gate-checked</tspan></text>
+  </g>
+
+  <!-- ===== Footer locators ===== -->
+  <text x="84" y="572" font-family="Menlo, 'SF Mono', 'JetBrains Mono', monospace"
+        font-size="15" fill="#7C8AA0" letter-spacing="0.01em">modeled-information-format/structured-madr</text>
+  <text x="1192" y="572" text-anchor="end" font-family="Menlo, 'SF Mono', 'JetBrains Mono', monospace"
+        font-size="15" fill="#7C8AA0" letter-spacing="0.02em">smadr.dev</text>
+</svg>
