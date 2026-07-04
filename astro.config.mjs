@@ -106,7 +106,7 @@ export default defineConfig({
             { label: "mif-docs plugin", link: "https://modeled-information-format.github.io/mif-docs-plugin/" },
             { label: "Plugin marketplace", link: "https://modeled-information-format.github.io/claude-code-plugins/" },
             { label: "mif-rs", link: "https://modeled-information-format.github.io/mif-rs/" },
-            { label: "Specification (mif-spec.dev)", link: "https://mif-spec.dev" },
+            { label: "Specification (mif-spec.dev)", link: "https://mif-spec.dev/" },
           ],
         },
       ],
