@@ -1,4 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="4" fill="#6d28d9"/>
-  <text x="16" y="22" font-family="system-ui, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">M</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="MIF mark">
+  <rect width="32" height="32" rx="6" fill="#0A0D13"/>
+  <g transform="translate(3.5 3.5) scale(0.52)" fill="none" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M6 42 L6 6 L24 29" stroke="#34D3E8"/>
+    <path d="M24 29 L42 6 L42 42" stroke="#F5B642"/>
+    <path d="M24 25 L28 29 L24 33 L20 29 Z" fill="#E8EEF6" stroke="none"/>
+  </g>
 </svg>

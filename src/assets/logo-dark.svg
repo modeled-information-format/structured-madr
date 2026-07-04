@@ -1,5 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 40">
-  <rect x="0" y="4" width="32" height="32" rx="4" fill="#8b5cf6"/>
-  <text x="16" y="26" font-family="system-ui, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">M</text>
-  <text x="44" y="27" font-family="system-ui, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0">Structured MADR</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 40" role="img" aria-label="Structured MADR">
+  <title>Structured MADR</title>
+  <g transform="translate(2 3) scale(0.6)" fill="none" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M6 42 L6 6 L24 29" stroke="#34D3E8"/>
+    <path d="M24 29 L42 6 L42 42" stroke="#F5B642"/>
+    <path d="M24 25 L28 29 L24 33 L20 29 Z" fill="#E8EEF6" stroke="none"/>
+  </g>
+  <text x="34" y="27" font-family="ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, Consolas, monospace" font-size="20" font-weight="700" letter-spacing="0.02em" fill="#E8EEF6">Structured MADR</text>
 </svg>

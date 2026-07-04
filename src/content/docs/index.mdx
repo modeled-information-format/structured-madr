@@ -1,6 +1,62 @@
 ---
 title: "Structured MADR"
 description: "Machine-readable Architectural Decision Records for the AI era"
+template: splash
+hero:
+  tagline: The decision a person writes and the metadata a parser filters on — one record, both readers, gate-checked before it merges.
+  image:
+    html: |
+      <svg viewBox="0 0 560 480" width="560" height="480" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Structured MADR — YAML frontmatter (machine-cyan) and a human-readable decision record (human-amber) joined by a validation gate.">
+        <title>Frontmatter meets the record, gate-checked</title>
+        <desc>A machine-cyan frontmatter block flows into a human-amber decision record, joined by a validated-checkmark gate badge below.</desc>
+        <defs>
+          <linearGradient id="smadr-field" x1="0" y1="0" x2="560" y2="480" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#0A0D13"/>
+            <stop offset="1" stop-color="#0E121B"/>
+          </linearGradient>
+        </defs>
+        <rect width="560" height="480" rx="20" fill="url(#smadr-field)"/>
+        <rect x="12" y="12" width="536" height="456" rx="14" fill="none" stroke="#222C3C" stroke-width="1.5"/>
+
+        <g transform="translate(238 26) scale(1.55)" fill="none" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+          <path d="M6 42 L6 6 L24 29" stroke="#34D3E8"/>
+          <path d="M24 29 L42 6 L42 42" stroke="#F5B642"/>
+          <path d="M24 25.6 L27.4 29 L24 32.4 L20.6 29 Z" fill="#E8EEF6" stroke="none"/>
+        </g>
+        <text x="280" y="122" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="12" letter-spacing="0.1em" fill="#7C8AA0">METADATA MEETS THE RECORD</text>
+
+        <g>
+          <rect x="70" y="148" width="420" height="96" rx="12" fill="#0A2630" stroke="#2E3A4D"/>
+          <path d="M70 160 a12 12 0 0 1 12 -12 h396 a12 12 0 0 1 12 12 v8 h-420 z" fill="#0A2630"/>
+          <circle cx="88" cy="164" r="5" fill="#34D3E8"/>
+          <text x="102" y="168" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="13" font-weight="700" fill="#34D3E8">frontmatter · machine-parseable</text>
+          <text x="88" y="196" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="12.5" xml:space="preserve"><tspan fill="#34D3E8">status</tspan><tspan fill="#7C8AA0">: accepted  </tspan><tspan fill="#34D3E8">risk</tspan><tspan fill="#7C8AA0">: </tspan><tspan fill="#F5B642">medium</tspan></text>
+          <text x="88" y="216" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="12.5" xml:space="preserve"><tspan fill="#34D3E8">drivers</tspan><tspan fill="#7C8AA0">: [cost, latency]  </tspan><tspan fill="#34D3E8">relates_to</tspan><tspan fill="#7C8AA0">: [...]</tspan></text>
+        </g>
+
+        <path d="M280 244 L280 270" stroke="#7C8AA0" stroke-width="2"/>
+        <path d="M266 258 L280 270 L294 258" stroke="#7C8AA0" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+
+        <g>
+          <rect x="70" y="278" width="420" height="86" rx="12" fill="#2A2110" stroke="#2E3A4D"/>
+          <path d="M70 290 a12 12 0 0 1 12 -12 h396 a12 12 0 0 1 12 12 v8 h-420 z" fill="#2A2110"/>
+          <circle cx="88" cy="294" r="5" fill="#F5B642"/>
+          <text x="102" y="298" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="13" font-weight="700" fill="#F5B642">decision record · human-readable</text>
+          <text x="88" y="330" font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#E8EEF6">## Use a managed queue over self-hosted</text>
+          <rect x="88" y="342" width="340" height="7" rx="3.5" fill="#3C4B63"/>
+        </g>
+
+        <rect x="98" y="386" width="364" height="30" rx="15" fill="#0B2618" stroke="#34C77B" stroke-opacity="0.5"/>
+        <circle cx="116" cy="401" r="4.5" fill="#34C77B"/>
+        <text x="132" y="405" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="12.5" letter-spacing="0.02em" xml:space="preserve"><tspan fill="#34C77B">structured-madr Action</tspan><tspan fill="#AEBCCF"> · gate-checked</tspan></text>
+      </svg>
+  actions:
+    - text: Getting Started
+      link: /tutorials/getting-started/
+      icon: right-arrow
+    - text: Schema Reference
+      link: /reference/schema/
+      variant: minimal
 ---
 
 import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
