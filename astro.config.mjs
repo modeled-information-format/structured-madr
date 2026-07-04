@@ -95,6 +95,14 @@ export default defineConfig({
             },
           ],
         },
+        {
+          label: "MIF ecosystem",
+          items: [
+            { label: "MIF home", link: "https://modeled-information-format.github.io/" },
+            { label: "Ecosystem docs", link: "https://modeled-information-format.github.io/docs/" },
+            { label: "Specification (mif-spec.dev)", link: "https://mif-spec.dev" },
+          ],
+        },
       ],
     }),
   ],
