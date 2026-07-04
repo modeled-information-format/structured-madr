@@ -8,6 +8,7 @@ export default defineConfig({
     starlight({
       plugins: [starlightLlmsTxt()],
       title: "Structured MADR",
+      customCss: ["./src/styles/mif-brand.css"],
       logo: {
         light: "./src/assets/logo-light.svg",
         dark: "./src/assets/logo-dark.svg",
