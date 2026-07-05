@@ -1,13 +1,13 @@
 {
   "source": "github.com/modeled-information-format/MIF",
-  "ref": "develop/v1.0.0",
-  "commit": "065988a35659055cf180d668226849a641a0767a",
+  "ref": "main",
+  "commit": "e597da69864bb3b87a32232cd919ef72d1deae01",
   "note": "Vendored verbatim; consumer-only. CI vendor-check fails if any file drifts from sha256.",
   "files": [
     {
       "path": ".github/schema/mif.schema.json",
       "upstream": "schema/mif.schema.json",
-      "sha256": "06d05ac1184ee5cc9c138ff0e6cc18aab4166938cfb773907a5421a51b3866c8",
+      "sha256": "01c795ef93aca35b517a956985e5cd59d4809b4886584a3407fc98a6b78d6c05",
       "verbatim": true
     },
     {
@@ -19,25 +19,25 @@
     {
       "path": ".github/schema/citation.schema.json",
       "upstream": "schema/citation.schema.json",
-      "sha256": "00045d8041489ce2634b1951c1c2358ace6f802b7e6675940b9d8a2113474bf0",
+      "sha256": "eb4cf77f64b249d0ef9a4c8c5c5286119c0204a9815598ac95ff715cc7d21968",
       "verbatim": true
     },
     {
       "path": ".github/schema/context.jsonld",
       "upstream": "schema/context.jsonld",
-      "sha256": "9f885015b0094f42b31a4ba56023cb217cd83b2bf0c057f10e015769a772959a",
+      "sha256": "ed497b6e5eb873e9cc5fcf9d9e39d02fbe0fd3baef17e92f11453504971b78af",
       "verbatim": true
     },
     {
       "path": ".github/schema/ontology/ontology.schema.json",
       "upstream": "schema/ontology/ontology.schema.json",
-      "sha256": "b2f5e492381f62c1c14d06fb0e20a2978bc7c20b162dda86dbabde0c6b717bd5",
+      "sha256": "75bda329b2e673806b8ccbfb48349b06b64b69521954b4f5de175c1525dad59c",
       "verbatim": true
     },
     {
       "path": ".github/schema/ontology/ontology.context.jsonld",
       "upstream": "schema/ontology/ontology.context.jsonld",
-      "sha256": "deb08ececc4c52f49247bf6916c1cc12d34c256780debfb22386f18bbe134155",
+      "sha256": "33ef4b2b7001924f29d69030aff2bc704e87abe32e1d3b1dac48f90e829aa212",
       "verbatim": true
     }
   ]
