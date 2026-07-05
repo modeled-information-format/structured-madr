@@ -115,20 +115,27 @@
       "items": { "$ref": "#/$defs/Citation" },
       "description": "Citation references (Level 3)"
     },
+    "documents": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/DocumentReference" },
+      "description": "Source documents that travel alongside this memory by reference (not embedded). Vendor-neutral pointers to the underlying artifacts a memory was derived from."
+    },
     "summary": {
       "type": "string",
       "maxLength": 500,
       "description": "Compressed content summary (Level 3, max 500 chars)"
     },
+    "properties": {
+      "type": "object",
+      "additionalProperties": {
+        "type": ["string", "number", "boolean", "null"]
+      },
+      "description": "First-class scalar properties: literal key/value pairs (e.g. from a knowledge-graph literal-object triple) that have no concept target and therefore cannot be a relationship. Values MUST be scalar (string, number, boolean, or null); nested objects/arrays are out of scope at Level 1."
+    },
     "compressedAt": {
       "type": "string",
       "format": "date-time",
       "description": "When compression was applied (Level 3)"
-    },
-    "blocks": {
-      "type": "object",
-      "additionalProperties": { "type": "string" },
-      "description": "Named block references (^block-id) with their text content for granular linking"
     },
     "extensions": {
       "type": "object",
@@ -137,6 +144,103 @@
     }
   },
   "$defs": {
+    "DocumentReference": {
+      "type": "object",
+      "description": "Vendor-neutral reference to a source document that travels alongside a memory by reference rather than by embedding a vendor-specific document schema. Locate the document by either `url` or `id`.",
+      "required": ["@type"],
+      "anyOf": [
+        { "required": ["url"] },
+        { "required": ["id"] }
+      ],
+      "properties": {
+        "@type": {
+          "const": "DocumentReference"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Stable identifier for the document (e.g. a URN or opaque key) when no resolvable URL is available"
+        },
+        "documentType": {
+          "type": "string",
+          "description": "Document category",
+          "oneOf": [
+            {
+              "enum": [
+                "pdf",
+                "html",
+                "markdown",
+                "text",
+                "transcript",
+                "dataset",
+                "spreadsheet",
+                "presentation",
+                "image",
+                "audio",
+                "video",
+                "email",
+                "other"
+              ]
+            },
+            {
+              "type": "string",
+              "pattern": "^[a-zA-Z][a-zA-Z0-9]*:[a-zA-Z][a-zA-Z0-9-]*$",
+              "description": "Custom namespaced type"
+            }
+          ]
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "minLength": 1,
+          "description": "Resolvable location of the document"
+        },
+        "hash": {
+          "type": "object",
+          "description": "Content hash for integrity verification",
+          "required": ["algorithm", "value"],
+          "properties": {
+            "algorithm": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Hash algorithm (e.g. sha256, sha512, blake3)"
+            },
+            "value": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Hash digest value"
+            }
+          },
+          "additionalProperties": false
+        },
+        "contentType": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Media type of the document (e.g. application/pdf, text/html)"
+        },
+        "byteLength": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Size of the document in bytes"
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Version token for the document (e.g. a commit SHA, ETag, or revision label)"
+        },
+        "retrievedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the document was retrieved (ISO 8601)"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Human-readable document title"
+        }
+      },
+      "additionalProperties": false
+    },
     "Citation": {
       "type": "object",
       "required": ["@type", "citationType", "citationRole", "title", "url"],
@@ -390,9 +494,50 @@
             "low_confidence",
             "uncertain"
           ]
+        },
+        "sourceRef": {
+          "type": "string",
+          "description": "OPTIONAL reference to the originating source (e.g. conversation:conv-456)"
+        },
+        "agent": {
+          "type": "string",
+          "description": "OPTIONAL identifier of the agent that created the unit (e.g. claude-3-opus)"
+        },
+        "agentVersion": {
+          "type": "string",
+          "description": "OPTIONAL version of the creating agent"
+        },
+        "wasGeneratedBy": {
+          "$ref": "#/$defs/ProvNode",
+          "description": "OPTIONAL prov:wasGeneratedBy — the activity that produced this unit"
+        },
+        "wasAttributedTo": {
+          "$ref": "#/$defs/ProvNode",
+          "description": "OPTIONAL prov:wasAttributedTo — the agent the unit is attributed to"
+        },
+        "wasDerivedFrom": {
+          "description": "OPTIONAL prov:wasDerivedFrom — the entity or entities this unit was derived from",
+          "oneOf": [
+            { "$ref": "#/$defs/ProvNode" },
+            { "type": "array", "items": { "$ref": "#/$defs/ProvNode" } }
+          ]
         }
       },
       "additionalProperties": true
+    },
+    "ProvNode": {
+      "description": "A W3C-PROV node: either a plain IRI/identifier string or an open node object (e.g. {\"@id\": \"...\", \"@type\": \"prov:Activity\"}). Kept permissive because PROV graphs are open-ended.",
+      "oneOf": [
+        { "type": "string" },
+        {
+          "type": "object",
+          "anyOf": [
+            { "required": ["@id"] },
+            { "required": ["id"] }
+          ],
+          "additionalProperties": true
+        }
+      ]
     },
     "EmbeddingReference": {
       "type": "object",
