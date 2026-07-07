@@ -28,7 +28,7 @@ jobs:
   actionlint:
     permissions:
       contents: read
-    uses: modeled-information-format/.github/.github/workflows/reusable-actionlint.yml@f83ee8058630235396f7242580570b26cf3617fa
+    uses: modeled-information-format/.github/.github/workflows/reusable-actionlint.yml@93f0c3a4cb0cc4883b808d2f843a5005aa01dd24
 
   # ── Security gates ────────────────────────────────────────────────────────
   secrets:
