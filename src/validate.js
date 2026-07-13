@@ -502,18 +502,6 @@ function validateOptions(content, headings, result) {
 /**
  * Validate a single ADR file.
  */
-function resolveBodyConfig(schema) {
-  const body = schema?.body;
-  if (!body) return {};
-  return {
-    sections: [...(body.sections ?? []), ...(body.optional_sections ?? [])],
-    optional: new Set((body.optional_sections ?? []).map((s) => s.toLowerCase())),
-    subsections: body.subsections ?? null,
-    titlePattern: body.title_pattern ? new RegExp(body.title_pattern) : null,
-    requireOptionHeadings: body.require_option_headings ?? true,
-  };
-}
-
 function validateFile(filePath, schema) {
   const result = new ValidationResult(filePath);
 
