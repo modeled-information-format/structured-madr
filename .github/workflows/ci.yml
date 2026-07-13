@@ -36,7 +36,7 @@ jobs:
       contents: read
       security-events: write
       actions: read
-    uses: modeled-information-format/.github/.github/workflows/reusable-secrets.yml@93f0c3a4cb0cc4883b808d2f843a5005aa01dd24
+    uses: modeled-information-format/.github/.github/workflows/reusable-secrets.yml@05b13774259a17140419556a45a48ba6a3e36e0c
     with:
       directory: .
 
