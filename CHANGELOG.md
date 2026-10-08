@@ -25,6 +25,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `@id`. A `memoryType`-only ADR projects with `memoryType` and no synthesized
   `conceptType`, which satisfies Level 1.
 
+### Security
+
+- **[Deps]**: `osv-scanner.toml` records the two advisories with no fix in
+  range after the astro 7.3.8 refresh: braces (no fixed release) and
+  postcss-selector-parser (fix needs a major that postcss-nested does not
+  accept), both build-time only.
+
 ### Fixed
 
 - **[MIF Compliance]**: `x-superseded-by: B` on ADR A projects as
