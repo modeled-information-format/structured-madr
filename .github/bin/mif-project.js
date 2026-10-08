@@ -24,22 +24,26 @@ export function uuidV5(name, namespace) {
 }
 
 // uuid5(NAMESPACE_URL, "https://mif-spec.dev"): the namespace MIF's
-// scripts/migrate_0_1_to_1_0.py, mif-rs, and mif-docs derive concept ids in, so
-// every MIF tool maps the same name to the same id.
+// scripts/migrate_0_1_to_1_0.py, mif-rs, and mif-docs also derive concept ids
+// in. The name hashed here is project-qualified (see conceptId), so two repos'
+// `0001-use-rust` ADRs do not share an id.
 export const MIF_NAMESPACE = uuidV5("https://mif-spec.dev", "6ba7b811-9dad-11d1-80b4-00c04fd430c8");
 
 // MIF 1.4.0+ (spec §6.1): a concept @id is urn:mif:<uuid>. A frontmatter `id`
-// that is already a concept URN or a bare UUID is used as is; anything else (a
-// slug, or a legacy structured urn:mif:smadr:... id) becomes a deterministic
-// UUIDv5, so re-projecting an ADR keeps its @id.
+// that already holds a UUID (bare, `urn:mif:`, `urn:uuid:`, or `{...}`) is used
+// as is, lowercased. Anything else becomes a deterministic UUIDv5 of the id the
+// pre-1.4 projector emitted (`smadr:<project>:<slug>`, or a legacy
+// `urn:mif:...` id verbatim), so each old id maps to exactly one new one and
+// re-projecting an ADR keeps its @id. Returns { id, replaced } where
+// `replaced` is the author's id when it was not already a UUID.
 export function conceptId(f, project, slug) {
   const raw = f.id == null ? "" : String(f.id).trim();
-  const bare = raw.replace(/^urn:mif:/, "");
-  if (UUID_RE.test(bare)) return `urn:mif:${bare}`;
+  const bare = raw.replace(/^urn:(mif|uuid):/i, "").replace(/^\{(.*)\}$/, "$1");
+  if (UUID_RE.test(bare)) return { id: `urn:mif:${bare.toLowerCase()}`, replaced: null };
   const name = raw.startsWith("urn:mif:")
-    ? bare
+    ? raw.slice("urn:mif:".length)
     : `smadr:${slugify(project)}:${raw ? slugify(raw) : slug || "adr"}`;
-  return `urn:mif:${uuidV5(name, MIF_NAMESPACE)}`;
+  return { id: `urn:mif:${uuidV5(name, MIF_NAMESPACE)}`, replaced: raw || null };
 }
 
 export function slugify(s) {
@@ -94,18 +98,22 @@ export function projectAdr(fm, body, opts = {}) {
   const f = fm || {};
   const project = f.project || "smadr";
   const slug = fileSlug(opts.filename);
-  const id = conceptId(f, project, slug);
+  const { id, replaced } = conceptId(f, project, slug);
 
   // ---- Level 1 (core) ----
   const obj = {
     "@context": MIF_CONTEXT,
     "@type": "Concept",
     "@id": id,
-    conceptType: f.conceptType || "semantic",
+    // MIF 1.4.0: the deprecated memoryType alone also satisfies the type check.
+    ...(f.conceptType || !f.memoryType ? { conceptType: f.conceptType || "semantic" } : {}),
+    ...(f.memoryType ? { memoryType: f.memoryType } : {}),
     content: String(body || "").trim(),
     created: toDateTime(f.created),
   };
   if (f.title) obj.title = f.title;
+  // Keep the author's non-UUID id findable after it is replaced by a UUID.
+  if (replaced) obj.aliases = [...new Set([...(Array.isArray(f.aliases) ? f.aliases : []), replaced])];
   if (level === 1) return obj;
 
   // ---- Level 2 (standard) ----
@@ -122,7 +130,8 @@ export function projectAdr(fm, body, opts = {}) {
   } else {
     const rels = [];
     if (f["x-superseded-by"]) {
-      rels.push({ type: "supersedes", target: `/decisions/${f["x-superseded-by"]}` });
+      // This ADR is the superseded one: the edge points at its replacement.
+      rels.push({ type: "superseded-by", target: `/decisions/${f["x-superseded-by"]}` });
     }
     // Guard: a stray `related: "x"` (not an array) must not iterate char-by-char
     // into bogus relationships — mode:mif skips the MADR schema that would catch it.

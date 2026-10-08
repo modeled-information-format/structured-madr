@@ -204,7 +204,7 @@ content-dependent fail-closed gate so sparse ADRs are not rejected. Mitigations:
 
 | Finding | Files | Lines | Assessment |
 |---------|-------|-------|------------|
-| MIF schemas vendored and checksum-pinned to MIF develop/v1.0.0 | `.github/VENDOR.lock` | L1-L44 | compliant |
+| MIF schemas vendored and checksum-pinned to the MIF 1.4.1 release mirror (was `develop/v1.0.0`; re-vendored 2026-10-08) | `.github/VENDOR.lock` | L1-L43 | compliant |
 | Projector + validator pass at L1/L2/L3 over all ADRs and examples | `.github/bin/` | n/a | compliant |
 | Composite action exposes `mode: mif`; CI dogfoods the gate | `action.yml`, `.github/workflows/ci.yml` | n/a | compliant |
 

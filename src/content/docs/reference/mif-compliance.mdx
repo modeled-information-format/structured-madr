@@ -95,11 +95,14 @@ ADRs as MIF from the same Action it already uses (see [GitHub Action](/reference
 ## Concept ids
 
 MIF 1.4.0+ requires a concept `@id` of the form `urn:mif:<uuid>`. The projector
-uses an ADR's frontmatter `id` as is when it is already a UUID or a
-`urn:mif:<uuid>`; otherwise (a slug, or no `id`) it derives a deterministic
-UUIDv5 of `smadr:<project>:<id-or-file-slug>` in the MIF namespace
-(`uuid5(NAMESPACE_URL, "https://mif-spec.dev")`, the one MIF, mif-rs and
-mif-docs use), so re-projecting an ADR keeps its `@id`.
+uses an ADR's frontmatter `id` as is (lowercased) when it already holds a UUID
+(bare, `urn:mif:`, `urn:uuid:` or `{…}`). Otherwise (a slug, a legacy
+`urn:mif:smadr:…` id, or no `id`) it derives a deterministic UUIDv5 of the id
+the pre-1.4 projector emitted, `smadr:<project>:<id-or-file-slug>`, in the MIF
+namespace `uuid5(NAMESPACE_URL, "https://mif-spec.dev")`. Re-projecting an ADR
+keeps its `@id`, and the replaced id is kept in `aliases`. The gate fails when
+two ADRs project to the same `@id`, and warns when `config.yml`'s `mifVersion`
+differs from the MIF release this Action vendors.
 
 ## Vendored schemas
 

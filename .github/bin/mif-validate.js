@@ -110,6 +110,13 @@ function main() {
     console.log(`::error::Invalid --level (expected 1|2|3)`);
     process.exit(2);
   }
+  // The consumer pins a MIF version; this Action validates against the one it
+  // vendors. Say so when they differ, since rules change between releases
+  // (MIF 1.4.0 made a concept @id urn:mif:<uuid>).
+  const lock = JSON.parse(readFileSync(join(S, "..", "VENDOR.lock"), "utf8"));
+  if (cfg.mifVersion !== undefined && String(cfg.mifVersion) !== lock.mifSpecVersion) {
+    console.log(`::warning file=${configFile}::mifVersion ${cfg.mifVersion} differs from the MIF ${lock.mifSpecVersion} schemas this Action validates against`);
+  }
   const level = args.level || cfg.mifConformanceLevel || 2;
   const adrPath = args.path || cfg.adrPath || "docs/decisions";
   const pattern = args.pattern || "**/*.md";
@@ -134,6 +141,7 @@ function main() {
   }
 
   let passed = 0, failed = 0;
+  const seenIds = new Map(); // @id -> first file that projected to it
   for (const file of files) {
     const rel = relative(process.cwd(), file);
     let obj;
@@ -144,6 +152,13 @@ function main() {
     } catch (e) {
       failed++; annotate("error", rel, `parse/projection failed: ${e.message}`); continue;
     }
+    const dup = seenIds.get(obj["@id"]);
+    if (dup) {
+      failed++;
+      annotate("error", rel, `MIF @id ${obj["@id"]} duplicates ${dup}; give one of them a distinct id`);
+      continue;
+    }
+    seenIds.set(obj["@id"], rel);
     if (validate(obj)) {
       passed++;
     } else {

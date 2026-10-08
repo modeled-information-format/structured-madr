@@ -4,6 +4,7 @@ import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
+import yaml from "yaml";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const mifDir = join(here, ".."); // .github
@@ -19,10 +20,10 @@ for (const f of lock.files) {
   }
 }
 // config.yml's mifVersion must name the release the schemas were vendored from.
-const cfg = readFileSync(join(mifDir, "config.yml"), "utf8").match(/^mifVersion:\s*([^\s#]+)/m);
-if (!cfg || cfg[1] !== lock.mifSpecVersion) {
+const mifVersion = (yaml.parse(readFileSync(join(mifDir, "config.yml"), "utf8")) || {}).mifVersion;
+if (String(mifVersion) !== lock.mifSpecVersion) {
   bad++;
-  console.log(`::error::.github/config.yml mifVersion (${cfg ? cfg[1] : "missing"}) != VENDOR.lock mifSpecVersion (${lock.mifSpecVersion})`);
+  console.log(`::error::.github/config.yml mifVersion (${mifVersion ?? "missing"}) != VENDOR.lock mifSpecVersion (${lock.mifSpecVersion})`);
 }
 if (bad === 0) console.log(`vendor-check: ${lock.files.length} files match VENDOR.lock (MIF ${lock.mifSpecVersion}, ${lock.source})`);
 process.exit(bad ? 1 : 0);
