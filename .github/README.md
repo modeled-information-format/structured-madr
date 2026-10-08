@@ -32,6 +32,8 @@ each ADR's frontmatter + body (MIF ADR-011) and validated against the level chos
 `schema/` is vendored verbatim from the immutable MIF 1.4.1 release mirror
 (`https://mif-spec.dev/schema/1.4.1/`); `VENDOR.lock` pins
 `mifSpecVersion` and a per-file sha256, and `config.yml`'s `mifVersion` must
-match it. Do not hand-edit — bump the vendor and re-run `node .github/bin/vendor-check.js`.
+match it. Do not hand-edit — bump the vendor and re-run `node .github/bin/vendor-check.js`
+(CI adds `--remote`, which also compares each file with the pinned mif-spec.dev
+mirror and so fails until that MIF release is published).
 To re-vendor: copy the files from `https://mif-spec.dev/schema/<version>/`, then
 regenerate `VENDOR.lock` (version, source, checksums) and set `mifVersion`.

@@ -132,8 +132,8 @@ jobs:
           cache: npm
       # vendor-check parses config.yml with the `yaml` package.
       - run: npm ci
-      - name: Verify vendored MIF schemas match VENDOR.lock
-        run: node .github/bin/vendor-check.js
+      - name: Verify vendored MIF schemas match VENDOR.lock and the MIF mirror
+        run: node .github/bin/vendor-check.js --remote
 
   validate-mif:
     name: Validate MIF Conformance
