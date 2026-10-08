@@ -3,8 +3,8 @@ message: "If you use this software, please cite it as below."
 type: software
 title: "Structured MADR"
 abstract: "Machine-readable Architectural Decision Records with YAML frontmatter, structured risk assessment, and compliance audit sections. An extension of MADR for the AI era."
-version: "1.1.0"
-date-released: "2026-03-06"
+version: "2.0.0"
+date-released: "2026-10-08"
 license: MIT
 url: "https://github.com/modeled-information-format/structured-madr"
 repository-code: "https://github.com/modeled-information-format/structured-madr"
@@ -31,8 +31,8 @@ preferred-citation:
     - family-names: "Allen"
       given-names: "Robert"
       orcid: "https://orcid.org/0009-0007-9691-004X"
-  version: "1.1.0"
-  date-released: "2026-03-06"
+  version: "2.0.0"
+  date-released: "2026-10-08"
   license: MIT
   url: "https://github.com/modeled-information-format/structured-madr"
   repository-code: "https://github.com/modeled-information-format/structured-madr"

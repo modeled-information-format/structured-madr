@@ -52,6 +52,6 @@ derivation; they are deep-validated against the MIF schema after projection.
 ## Notes
 
 - The MIF schemas are vendored under `.github/schema/` and pinned in `VENDOR.lock`
-  (MIF 1.4.1). Do not hand-edit vendored files; bump the vendor instead.
+  (MIF 1.4.2). Do not hand-edit vendored files; bump the vendor instead.
 - To type ADRs as MIF entities, enable the `structured-madr` ontology in
   `.github/config.yml` `ontologies[]`; the projection then stamps `entity.entity_type: adr`.

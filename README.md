@@ -9,7 +9,7 @@
 
 Structured MADR is an extension of [MADR](https://adr.github.io/madr/) (Markdown Architectural Decision Records) that adds YAML frontmatter for machine-readable metadata, comprehensive option analysis with risk assessments, and required audit sections for compliance tracking.
 
-[![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Specification](https://img.shields.io/badge/spec-1.0.0-purple.svg)](SPECIFICATION.md)
 [![CI](https://github.com/modeled-information-format/structured-madr/actions/workflows/ci.yml/badge.svg)](https://github.com/modeled-information-format/structured-madr/actions/workflows/ci.yml)
@@ -250,7 +250,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Validate Structured MADR
-        uses: modeled-information-format/structured-madr@v1
+        uses: modeled-information-format/structured-madr@v2
         with:
           path: docs/decisions    # Path to your ADRs (default: docs/decisions)
           pattern: '**/*.md'      # Glob pattern for ADR files (default: **/*.md)
@@ -334,7 +334,7 @@ If you use Structured MADR in academic or published work, please cite it using t
 @software{Allen_Structured_MADR,
   author    = {Allen, Robert},
   title     = {Structured MADR},
-  version   = {1.1.0},
+  version   = {2.0.0},
   url       = {https://github.com/modeled-information-format/structured-madr},
   license   = {MIT}
 }

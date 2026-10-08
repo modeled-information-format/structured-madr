@@ -23,14 +23,14 @@ each ADR's frontmatter + body (MIF ADR-011) and validated against the level chos
 
 - **Locally / CI:** `npm run validate:mif` (uses `config.yml`). Override with
   `--level N`, `--path DIR`, `--pattern GLOB`, `--config FILE`, `--strict`.
-- **As the published Action:** `uses: <owner>/structured-madr@v1` with `mode: mif`.
+- **As the published Action:** `uses: <owner>/structured-madr@v2` with `mode: mif`.
 - **In Claude Code:** the `mif-compliance` skill + `/mif-validate` and `/mif-project`
   commands + the `adr-mif-author` agent + an authoring-time enforcement hook.
 
 ## Vendored schemas
 
-`schema/` is vendored verbatim from the immutable MIF 1.4.1 release mirror
-(`https://mif-spec.dev/schema/1.4.1/`); `VENDOR.lock` pins
+`schema/` is vendored verbatim from the immutable MIF 1.4.2 release mirror
+(`https://mif-spec.dev/schema/1.4.2/`); `VENDOR.lock` pins
 `mifSpecVersion` and a per-file sha256, and `config.yml`'s `mifVersion` must
 match it. Do not hand-edit — bump the vendor and re-run `node .github/bin/vendor-check.js`
 (CI adds `--remote`, which also compares each file with the pinned mif-spec.dev
