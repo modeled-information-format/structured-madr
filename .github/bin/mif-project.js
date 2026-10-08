@@ -7,7 +7,40 @@
 // overrides honored when MIF-native keys are present. Output is validated by the
 // level profiles (see mif-validate.js); this module only assembles.
 
+import { createHash } from "node:crypto";
+
 const MIF_CONTEXT = "https://mif-spec.dev/schema/context.jsonld";
+
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+// RFC 9562 UUIDv5 (SHA-1, name-based) of `name` in `namespace` (a UUID string).
+export function uuidV5(name, namespace) {
+  const ns = Buffer.from(namespace.replace(/-/g, ""), "hex");
+  const hash = createHash("sha1").update(ns).update(Buffer.from(String(name), "utf8")).digest();
+  hash[6] = (hash[6] & 0x0f) | 0x50;
+  hash[8] = (hash[8] & 0x3f) | 0x80;
+  const h = hash.subarray(0, 16).toString("hex");
+  return `${h.slice(0, 8)}-${h.slice(8, 12)}-${h.slice(12, 16)}-${h.slice(16, 20)}-${h.slice(20)}`;
+}
+
+// uuid5(NAMESPACE_URL, "https://mif-spec.dev"): the namespace MIF's
+// scripts/migrate_0_1_to_1_0.py, mif-rs, and mif-docs derive concept ids in, so
+// every MIF tool maps the same name to the same id.
+export const MIF_NAMESPACE = uuidV5("https://mif-spec.dev", "6ba7b811-9dad-11d1-80b4-00c04fd430c8");
+
+// MIF 1.4.0+ (spec §6.1): a concept @id is urn:mif:<uuid>. A frontmatter `id`
+// that is already a concept URN or a bare UUID is used as is; anything else (a
+// slug, or a legacy structured urn:mif:smadr:... id) becomes a deterministic
+// UUIDv5, so re-projecting an ADR keeps its @id.
+export function conceptId(f, project, slug) {
+  const raw = f.id == null ? "" : String(f.id).trim();
+  const bare = raw.replace(/^urn:mif:/, "");
+  if (UUID_RE.test(bare)) return `urn:mif:${bare}`;
+  const name = raw.startsWith("urn:mif:")
+    ? bare
+    : `smadr:${slugify(project)}:${raw ? slugify(raw) : slug || "adr"}`;
+  return `urn:mif:${uuidV5(name, MIF_NAMESPACE)}`;
+}
 
 export function slugify(s) {
   return String(s || "")
@@ -61,11 +94,7 @@ export function projectAdr(fm, body, opts = {}) {
   const f = fm || {};
   const project = f.project || "smadr";
   const slug = fileSlug(opts.filename);
-  // A full `urn:mif:` id is used verbatim; a bare UUID/slug `id` becomes the URN's
-  // last segment (so the documented override is effective); else fall back to the file slug.
-  const id = f.id && /^urn:mif:/.test(f.id)
-    ? f.id
-    : `urn:mif:smadr:${slugify(project)}:${f.id ? slugify(f.id) : slug || "adr"}`;
+  const id = conceptId(f, project, slug);
 
   // ---- Level 1 (core) ----
   const obj = {

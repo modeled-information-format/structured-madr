@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **[MIF Compliance]**: aligned with MIF specification **1.4.1**. The vendored
+  schemas come from the immutable `https://mif-spec.dev/schema/1.4.1/` mirror
+  (was MIF 1.2.1); `config.yml` `mifVersion` is 1.4.1, and `vendor-check` fails
+  if it disagrees with `VENDOR.lock`'s `mifSpecVersion`.
+- **[MIF Compliance]** (breaking for consumers of projected ids): MIF 1.4.0+
+  requires a concept `@id` of `urn:mif:<uuid>`. The projector uses a UUID `id`
+  as is and turns a slug, a legacy `urn:mif:smadr:…` id, or a missing `id` into
+  a deterministic UUIDv5 of `smadr:<project>:<id-or-file-slug>` in the MIF
+  namespace (`uuid5(NAMESPACE_URL, "https://mif-spec.dev")`), replacing the
+  structured `urn:mif:smadr:<project>:<slug>` ids 1.4.0 rejects. A
+  `memoryType`-only object now satisfies the Level 1 type requirement.
+
 ### Added
 
 - **[MIF Compliance]**: validate ADRs as MIF (Modeled Information Format) at a

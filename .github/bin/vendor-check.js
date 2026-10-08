@@ -18,5 +18,11 @@ for (const f of lock.files) {
     console.log(`::error::vendored ${f.path} drifted from VENDOR.lock (got ${got.slice(0, 12)}…, want ${f.sha256.slice(0, 12)}…)`);
   }
 }
-if (bad === 0) console.log(`vendor-check: ${lock.files.length} files match VENDOR.lock (MIF ${lock.ref} @ ${lock.commit.slice(0, 12)})`);
+// config.yml's mifVersion must name the release the schemas were vendored from.
+const cfg = readFileSync(join(mifDir, "config.yml"), "utf8").match(/^mifVersion:\s*([^\s#]+)/m);
+if (!cfg || cfg[1] !== lock.mifSpecVersion) {
+  bad++;
+  console.log(`::error::.github/config.yml mifVersion (${cfg ? cfg[1] : "missing"}) != VENDOR.lock mifSpecVersion (${lock.mifSpecVersion})`);
+}
+if (bad === 0) console.log(`vendor-check: ${lock.files.length} files match VENDOR.lock (MIF ${lock.mifSpecVersion}, ${lock.source})`);
 process.exit(bad ? 1 : 0);

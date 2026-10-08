@@ -13,7 +13,7 @@ JSON-LD; you fill frontmatter, and the projector assembles + validates it.
 
 ## What each level requires (content-dependent)
 
-- **Level 1 (core):** every ADR — `@id` (synthesized urn), `conceptType` (semantic),
+- **Level 1 (core):** every ADR — `@id` (`urn:mif:<uuid>`; a UUIDv5 when the ADR has no UUID `id`), `conceptType` (semantic),
   `content` (the body), `created`, `title`. Already satisfied by a valid ADR.
 - **Level 2 (standard, default):** adds `namespace` (derived `_semantic/decisions/<category>`),
   `modified` (from `updated`), `temporal`. Relationships and entities are derived and
@@ -52,6 +52,6 @@ derivation; they are deep-validated against the MIF schema after projection.
 ## Notes
 
 - The MIF schemas are vendored under `.github/schema/` and pinned in `VENDOR.lock`
-  (MIF `develop/v1.0.0`). Do not hand-edit vendored files; bump the vendor instead.
+  (MIF 1.4.1). Do not hand-edit vendored files; bump the vendor instead.
 - To type ADRs as MIF entities, enable the `structured-madr` ontology in
   `.github/config.yml` `ontologies[]`; the projection then stamps `entity.entity_type: adr`.

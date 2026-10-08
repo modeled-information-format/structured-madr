@@ -120,7 +120,7 @@
     },
     "id": {
       "type": "string",
-      "description": "MIF: stable identifier for this decision (UUID or slug). If absent, the projector synthesizes urn:mif:smadr:<project>:<file-slug>.",
+      "description": "MIF: stable identifier for this decision (UUID or slug). A UUID is used as the concept id; a slug, or no id, becomes a deterministic UUIDv5 of smadr:<project>:<id-or-file-slug> in the MIF namespace, giving urn:mif:<uuid>.",
       "minLength": 1
     },
     "conceptType": {
