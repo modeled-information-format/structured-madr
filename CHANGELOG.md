@@ -27,10 +27,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
-- **[Deps]**: `osv-scanner.toml` records the two advisories with no fix in
-  range after the astro 7.3.8 refresh: braces (no fixed release) and
-  postcss-selector-parser (fix needs a major that postcss-nested does not
-  accept), both build-time only.
+- **[Deps]**: `osv-scanner.toml` records braces GHSA-vfj7-8cjw-p6xm (no fixed
+  release; build-time only) as the one remaining accepted advisory.
+- **[Deps]**: postcss-selector-parser GHSA-rj75-hqrm-r3gf is fixed rather than
+  waived: an npm `overrides` entry forces `^7.1.6` past postcss-nested's `^6`
+  range, and its `osv-scanner.toml` waiver is removed.
 
 ### Fixed
 
