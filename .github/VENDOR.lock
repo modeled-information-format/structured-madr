@@ -1,42 +1,41 @@
 {
-  "source": "github.com/modeled-information-format/MIF",
-  "ref": "main",
-  "commit": "e597da69864bb3b87a32232cd919ef72d1deae01",
-  "note": "Vendored verbatim; consumer-only. CI vendor-check fails if any file drifts from sha256.",
+  "source": "https://mif-spec.dev/schema/1.4.1/",
+  "mifSpecVersion": "1.4.1",
+  "note": "Vendored verbatim from the immutable MIF 1.4.1 release mirror; consumer-only. CI vendor-check fails if any file drifts from sha256, or if .github/config.yml's mifVersion disagrees with mifSpecVersion.",
   "files": [
     {
       "path": ".github/schema/mif.schema.json",
-      "upstream": "schema/mif.schema.json",
-      "sha256": "01c795ef93aca35b517a956985e5cd59d4809b4886584a3407fc98a6b78d6c05",
+      "upstream": "mif.schema.json",
+      "sha256": "71063262aa5fb3b46ff1cb09c5371b87edcfa97c278aa5ff41f862478b130547",
       "verbatim": true
     },
     {
       "path": ".github/schema/definitions/entity-reference.schema.json",
-      "upstream": "schema/definitions/entity-reference.schema.json",
+      "upstream": "definitions/entity-reference.schema.json",
       "sha256": "59906a7fde4268153d4ad45a2f0bf311e66a246f3eb19053b03fdd07b854400f",
       "verbatim": true
     },
     {
       "path": ".github/schema/citation.schema.json",
-      "upstream": "schema/citation.schema.json",
+      "upstream": "citation.schema.json",
       "sha256": "eb4cf77f64b249d0ef9a4c8c5c5286119c0204a9815598ac95ff715cc7d21968",
       "verbatim": true
     },
     {
       "path": ".github/schema/context.jsonld",
-      "upstream": "schema/context.jsonld",
-      "sha256": "ed497b6e5eb873e9cc5fcf9d9e39d02fbe0fd3baef17e92f11453504971b78af",
+      "upstream": "context.jsonld",
+      "sha256": "53f7a6b78a9f34f4dea0a7a865dabffedb032c4109eba5c195410b005b25da4b",
       "verbatim": true
     },
     {
       "path": ".github/schema/ontology/ontology.schema.json",
-      "upstream": "schema/ontology/ontology.schema.json",
+      "upstream": "ontology/ontology.schema.json",
       "sha256": "75bda329b2e673806b8ccbfb48349b06b64b69521954b4f5de175c1525dad59c",
       "verbatim": true
     },
     {
       "path": ".github/schema/ontology/ontology.context.jsonld",
-      "upstream": "schema/ontology/ontology.context.jsonld",
+      "upstream": "ontology/ontology.context.jsonld",
       "sha256": "33ef4b2b7001924f29d69030aff2bc704e87abe32e1d3b1dac48f90e829aa212",
       "verbatim": true
     }

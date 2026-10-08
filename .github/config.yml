@@ -2,7 +2,7 @@
 # Validated by .github/schema/config.schema.json.
 $schema: ./schema/config.schema.json
 version: 1.0.0
-mifVersion: 1.0.0            # pinned MIF spec version (see .github/VENDOR.lock)
+mifVersion: 1.4.1            # pinned MIF spec version (must equal mifSpecVersion in .github/VENDOR.lock)
 mifConformanceLevel: 2       # the knob: 1 (core) | 2 (standard) | 3 (full)
 adrPath: docs/decisions      # glob root for ADRs to project + validate
 ontologies:

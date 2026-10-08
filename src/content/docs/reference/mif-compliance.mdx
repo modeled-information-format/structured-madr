@@ -35,7 +35,7 @@ Edit the one config file, `.github/config.yml`:
 
 ```yaml
 version: 1.0.0
-mifVersion: 1.0.0
+mifVersion: 1.4.1
 mifConformanceLevel: 2   # 1 (core) | 2 (standard, default) | 3 (full)
 adrPath: docs/decisions
 ontologies:
@@ -46,7 +46,7 @@ extensions: []
 
 | Level | Adds (always-derivable) | Optional (validated only when present) |
 |-------|-------------------------|----------------------------------------|
-| **1 — Core** | `@id`, `conceptType`, `content` (body), `created`, `title` | — |
+| **1 — Core** | `@id` (`urn:mif:<uuid>`), `conceptType`, `content` (body), `created`, `title` | — |
 | **2 — Standard** | `namespace`, `modified`, `temporal` | `relationships`, `entities` |
 | **3 — Full** | `provenance`, `temporal.validFrom` | `citations`, `extensions`, `summary` |
 
@@ -92,8 +92,22 @@ ADRs as MIF from the same Action it already uses (see [GitHub Action](/reference
     # mif-level: 3      # optional override
 ```
 
+## Concept ids
+
+MIF 1.4.0+ requires a concept `@id` of the form `urn:mif:<uuid>`. The projector
+uses an ADR's frontmatter `id` as is (lowercased) when it already holds a UUID
+(bare, `urn:mif:`, `urn:uuid:` or `{…}`). Otherwise (a slug, a legacy
+`urn:mif:smadr:…` id, or no `id`) it derives a deterministic UUIDv5 of the id
+the pre-1.4 projector emitted, `smadr:<project>:<id-or-file-slug>`, in the MIF
+namespace `uuid5(NAMESPACE_URL, "https://mif-spec.dev")`. Re-projecting an ADR
+keeps its `@id`, and the replaced id is kept in `aliases`. The gate fails when
+two ADRs project to the same `@id`, and warns when `config.yml`'s `mifVersion`
+differs from the MIF release this Action vendors.
+
 ## Vendored schemas
 
-`.github/schema/` mirrors MIF `develop/v1.0.0` verbatim; `.github/VENDOR.lock`
-pins the commit and a per-file SHA-256. A `vendor-check` CI gate fails if any vendored
+`.github/schema/` is vendored verbatim from the immutable MIF 1.4.1 release mirror
+(`https://mif-spec.dev/schema/1.4.1/`);
+`.github/VENDOR.lock` pins `mifSpecVersion` and a per-file SHA-256, and
+`config.yml`'s `mifVersion` must match it. A `vendor-check` CI gate fails if any vendored
 file drifts. Do not hand-edit vendored schemas — re-vendor and regenerate the lock.

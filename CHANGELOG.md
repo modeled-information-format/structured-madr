@@ -7,6 +7,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **[MIF Compliance]**: aligned with MIF specification **1.4.1**. The vendored
+  schemas come from the immutable `https://mif-spec.dev/schema/1.4.1/` mirror
+  (were pinned to MIF `develop/v1.0.0` at `e597da69`, whose schemas match MIF
+  1.2.1); `config.yml` `mifVersion` is 1.4.1 (was 1.0.0), and `vendor-check`
+  fails if it disagrees with `VENDOR.lock`'s `mifSpecVersion`. The MIF gate
+  warns when a consumer's `mifVersion` differs from the vendored release.
+- **[MIF Compliance]** (breaking for consumers of projected ids): MIF 1.4.0+
+  requires a concept `@id` of `urn:mif:<uuid>`. The projector uses a UUID `id`
+  as is (lowercased; bare, `urn:mif:`, `urn:uuid:` or `{…}`) and turns a slug,
+  a legacy `urn:mif:smadr:…` id, or a missing `id` into a deterministic UUIDv5
+  of the id the old projector emitted (`smadr:<project>:<id-or-file-slug>`) in
+  the MIF namespace `uuid5(NAMESPACE_URL, "https://mif-spec.dev")`, keeping the
+  replaced id in `aliases`. The gate fails when two ADRs project to the same
+  `@id`. A `memoryType`-only ADR projects with `memoryType` and no synthesized
+  `conceptType`, which satisfies Level 1.
+
+### Security
+
+- **[Deps]**: `osv-scanner.toml` records the two advisories with no fix in
+  range after the astro 7.3.8 refresh: braces (no fixed release) and
+  postcss-selector-parser (fix needs a major that postcss-nested does not
+  accept), both build-time only.
+
+### Fixed
+
+- **[MIF Compliance]**: `x-superseded-by: B` on ADR A projects as
+  `superseded-by` → B; it was `supersedes` → B, the reverse of the fact.
+
 ### Added
 
 - **[MIF Compliance]**: validate ADRs as MIF (Modeled Information Format) at a
