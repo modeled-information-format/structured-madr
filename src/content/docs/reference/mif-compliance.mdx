@@ -35,7 +35,7 @@ Edit the one config file, `.github/config.yml`:
 
 ```yaml
 version: 1.0.0
-mifVersion: 1.4.1
+mifVersion: 1.4.2
 mifConformanceLevel: 2   # 1 (core) | 2 (standard, default) | 3 (full)
 adrPath: docs/decisions
 ontologies:
@@ -85,7 +85,7 @@ The composite GitHub Action exposes a `mode: mif`, so any repository can validat
 ADRs as MIF from the same Action it already uses (see [GitHub Action](/reference/github-action/)):
 
 ```yaml
-- uses: modeled-information-format/structured-madr@v1
+- uses: modeled-information-format/structured-madr@v2
   with:
     mode: mif
     path: docs/decisions
@@ -106,8 +106,8 @@ differs from the MIF release this Action vendors.
 
 ## Vendored schemas
 
-`.github/schema/` is vendored verbatim from the immutable MIF 1.4.1 release mirror
-(`https://mif-spec.dev/schema/1.4.1/`);
+`.github/schema/` is vendored verbatim from the immutable MIF 1.4.2 release mirror
+(`https://mif-spec.dev/schema/1.4.2/`);
 `.github/VENDOR.lock` pins `mifSpecVersion` and a per-file SHA-256, and
 `config.yml`'s `mifVersion` must match it. A `vendor-check` CI gate fails if any vendored
 file drifts. Do not hand-edit vendored schemas — re-vendor and regenerate the lock.

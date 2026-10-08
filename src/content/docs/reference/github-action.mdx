@@ -26,10 +26,15 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Validate Structured MADR
-        uses: modeled-information-format/structured-madr@v1
+        uses: modeled-information-format/structured-madr@v2
         with:
           path: docs/decisions
 ```
+
+`@v2` is a moving major-version tag that follows the latest 2.x release. Pin an
+exact release (`@v2.0.0`) or a commit SHA if you need a fixed version. Version 2
+changes the `@id` that `mode: mif` projects (`urn:mif:<uuid>`, not
+`urn:mif:smadr:<project>:<slug>`); see the [changelog](/reference/changelog/).
 
 ## Inputs
 
@@ -70,7 +75,7 @@ unless overridden.
 | `mif-config` | `string` | `.github/config.yml` | Path to the MIF config in the consumer repo |
 
 ```yaml
-- uses: modeled-information-format/structured-madr@v1
+- uses: modeled-information-format/structured-madr@v2
   with:
     mode: mif
     path: docs/decisions
@@ -89,7 +94,7 @@ See the [MIF Compliance reference](/reference/mif-compliance/) for the level mod
 Fail the workflow on any warnings, not just errors:
 
 ```yaml
-- uses: modeled-information-format/structured-madr@v1
+- uses: modeled-information-format/structured-madr@v2
   with:
     strict: 'true'
 ```
@@ -99,7 +104,7 @@ Fail the workflow on any warnings, not just errors:
 If your ADRs live in a non-default location:
 
 ```yaml
-- uses: modeled-information-format/structured-madr@v1
+- uses: modeled-information-format/structured-madr@v2
   with:
     path: architecture/decisions
 ```
@@ -109,7 +114,7 @@ If your ADRs live in a non-default location:
 Validate against your own extended schema:
 
 ```yaml
-- uses: modeled-information-format/structured-madr@v1
+- uses: modeled-information-format/structured-madr@v2
   with:
     schema: .github/schemas/custom-madr.schema.json
 ```
@@ -119,7 +124,7 @@ Validate against your own extended schema:
 Report validation results without failing the workflow:
 
 ```yaml
-- uses: modeled-information-format/structured-madr@v1
+- uses: modeled-information-format/structured-madr@v2
   id: adr-check
   with:
     fail-on-error: 'false'
@@ -133,7 +138,7 @@ Report validation results without failing the workflow:
 ### Using Outputs in Conditional Steps
 
 ```yaml
-- uses: modeled-information-format/structured-madr@v1
+- uses: modeled-information-format/structured-madr@v2
   id: validate
   with:
     fail-on-error: 'false'

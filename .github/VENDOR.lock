@@ -1,7 +1,7 @@
 {
-  "source": "https://mif-spec.dev/schema/1.4.1/",
-  "mifSpecVersion": "1.4.1",
-  "note": "Vendored verbatim from the immutable MIF 1.4.1 release mirror; consumer-only. CI vendor-check fails if any file drifts from sha256, or if .github/config.yml's mifVersion disagrees with mifSpecVersion.",
+  "source": "https://mif-spec.dev/schema/1.4.2/",
+  "mifSpecVersion": "1.4.2",
+  "note": "Vendored verbatim from the immutable MIF 1.4.2 release mirror; consumer-only. CI vendor-check fails if any file drifts from sha256, or if .github/config.yml's mifVersion disagrees with mifSpecVersion.",
   "files": [
     {
       "path": ".github/schema/mif.schema.json",
