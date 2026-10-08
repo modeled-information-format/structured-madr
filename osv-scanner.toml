@@ -12,11 +12,3 @@ id = "GHSA-vfj7-8cjw-p6xm"
 # matching patterns from this repo's own build config, never user input.
 # Remove once braces ships a fix.
 reason = "No fixed braces release exists; dev/build-time-only transitive matching repo-authored patterns, never untrusted input. Revisit when braces ships a fix."
-
-[[IgnoredVulns]]
-id = "GHSA-rj75-hqrm-r3gf"
-# postcss-selector-parser 6.1.4: quadratic selector parsing (CPU exhaustion).
-# Dev/build-time only, via @astrojs/starlight -> expressive-code ->
-# postcss-nested, which requires ^6; the fix is 7.1.6. It parses this site's
-# own CSS at build time, never user input.
-reason = "Build-time-only CPU-exhaustion in postcss-selector-parser via starlight's expressive-code (postcss-nested requires ^6; fix is 7.1.6), on repo-authored CSS. Revisit when postcss-nested accepts v7."
