@@ -23,12 +23,12 @@ jobs:
   pin-check:
     permissions:
       contents: read
-    uses: modeled-information-format/.github/.github/workflows/pin-check.yml@93f0c3a4cb0cc4883b808d2f843a5005aa01dd24
+    uses: modeled-information-format/.github/.github/workflows/pin-check.yml@c72b3fae829318990ba3da9b9d5ea0671ac5151f
 
   actionlint:
     permissions:
       contents: read
-    uses: modeled-information-format/.github/.github/workflows/reusable-actionlint.yml@86b74cdfa5c1e913be72a4a9464c0e7f3036d24a
+    uses: modeled-information-format/.github/.github/workflows/reusable-actionlint.yml@c72b3fae829318990ba3da9b9d5ea0671ac5151f
 
   # ── Security gates ────────────────────────────────────────────────────────
   secrets:
@@ -36,7 +36,7 @@ jobs:
       contents: read
       security-events: write
       actions: read
-    uses: modeled-information-format/.github/.github/workflows/reusable-secrets.yml@55bb7629147965895d480ed94b08b098ff431a35
+    uses: modeled-information-format/.github/.github/workflows/reusable-secrets.yml@c72b3fae829318990ba3da9b9d5ea0671ac5151f
     with:
       directory: .
 
@@ -46,7 +46,7 @@ jobs:
       contents: read
       actions: read
       packages: read
-    uses: modeled-information-format/.github/.github/workflows/reusable-sast-codeql.yml@f83ee8058630235396f7242580570b26cf3617fa
+    uses: modeled-information-format/.github/.github/workflows/reusable-sast-codeql.yml@c72b3fae829318990ba3da9b9d5ea0671ac5151f
     with:
       languages: 'javascript-typescript,actions'
 
@@ -56,7 +56,7 @@ jobs:
       contents: read
       security-events: write
       pull-requests: write
-    uses: modeled-information-format/.github/.github/workflows/reusable-sca-osv.yml@55bb7629147965895d480ed94b08b098ff431a35
+    uses: modeled-information-format/.github/.github/workflows/reusable-sca-osv.yml@c72b3fae829318990ba3da9b9d5ea0671ac5151f
     with:
       fail-on-severity: high
 
